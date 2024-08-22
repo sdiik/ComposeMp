@@ -16,15 +16,14 @@ plugins {
 }
 
 kotlin {
-
     cocoapods {
         version = "1.0"
         summary = "Some description for a Kotlin/Native module"
         homepage = "Link to a Kotlin/Native module"
-        name = "ComposeMP"
+        name = "PupukKandang"
 
         framework {
-            baseName = "ComposeMP"
+            baseName = "PupukKandang"
             isStatic = false
             transitiveExport = false
             embedBitcode(BitcodeEmbeddingMode.BITCODE)
@@ -41,7 +40,7 @@ kotlin {
         }
     }
 
-    val xcframeworkName = "Shared"
+    val xcframeworkName = "PupukKandang"
     val xcf = XCFramework(xcframeworkName)
 
     listOf(
