@@ -1,6 +1,10 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,9 +12,27 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.cocoapods)
 }
 
 kotlin {
+
+    cocoapods {
+        version = "1.0"
+        summary = "Some description for a Kotlin/Native module"
+        homepage = "Link to a Kotlin/Native module"
+        name = "ComposeMP"
+
+        framework {
+            baseName = "ComposeMP"
+            isStatic = false
+            transitiveExport = false
+            embedBitcode(BitcodeEmbeddingMode.BITCODE)
+        }
+
+        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
+    }
 
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -20,6 +42,7 @@ kotlin {
     }
 
     val xcframeworkName = "Shared"
+    val xcf = XCFramework(xcframeworkName)
 
     listOf(
         iosX64(),
@@ -28,6 +51,10 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = xcframeworkName
+
+            binaryOption("bundleId", "org.example.${xcframeworkName}")
+            xcf.add(this)
+
             isStatic = true
         }
     }
@@ -107,4 +134,3 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
-
