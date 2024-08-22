@@ -1,18 +1,20 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'PupukKandang'
-    spec.version                  = '1.0.3'
+    spec.name                     = 'ComposeMP'
+    spec.version                  = '1.0'
     spec.homepage                 = 'Link to a Kotlin/Native module'
-    spec.source                   = { :git => 'https://github.com/sdiik/ComposeMp.git', :tag => s.version.to_s }
-    spec.authors                  = { 'sdiik' => 'ahmadshiddiq0@gmail.com' }
+    spec.source                   = { :http=> ''}
+    spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Some description for a Kotlin/Native module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/PupukKandang.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/ComposeMP.framework'
     spec.libraries                = 'c++'
                 
-    if !Dir.exist?('build/cocoapods/framework/PupukKandang.framework') || Dir.empty?('build/cocoapods/framework/PupukKandang.framework')
+                
+                
+    if !Dir.exist?('build/cocoapods/framework/ComposeMP.framework') || Dir.empty?('build/cocoapods/framework/ComposeMP.framework')
         raise "
 
-        Kotlin framework 'PupukKandang' doesn't exist yet, so a proper Xcode project can't be generated.
+        Kotlin framework 'ComposeMP' doesn't exist yet, so a proper Xcode project can't be generated.
         'pod install' should be executed after running ':generateDummyFramework' Gradle task:
 
             ./gradlew :composeApp:generateDummyFramework
@@ -26,12 +28,12 @@ Pod::Spec.new do |spec|
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':composeApp',
-        'PRODUCT_MODULE_NAME' => 'PupukKandang',
+        'PRODUCT_MODULE_NAME' => 'ComposeMP',
     }
                 
     spec.script_phases = [
         {
-            :name => 'Build PupukKandang',
+            :name => 'Build ComposeMP',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
