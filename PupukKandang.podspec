@@ -1,15 +1,13 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'PupukKandang'
-    spec.version                  = '1.0'
+    spec.version                  = '1.0.3'
     spec.homepage                 = 'Link to a Kotlin/Native module'
-    spec.source                   = { :http=> ''}
-    spec.authors                  = ''
+    spec.source                   = { :git => 'https://github.com/sdiik/ComposeMp.git', :tag => s.version.to_s }
+    spec.authors                  = { 'sdiik' => 'ahmadshiddiq0@gmail.com' }
     spec.license                  = ''
     spec.summary                  = 'Some description for a Kotlin/Native module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/PupukKandang.framework'
     spec.libraries                = 'c++'
-                
-                
                 
     if !Dir.exist?('build/cocoapods/framework/PupukKandang.framework') || Dir.empty?('build/cocoapods/framework/PupukKandang.framework')
         raise "
